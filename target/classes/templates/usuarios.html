@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuários</title>
+</head>
+<body>
+<h1>Usuários Cadastrados</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Endereço</th>
+        <th>Tipo</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario, iterStat : ${usuarios}">
+        <td th:text="${usuario.nome}">Nome</td>
+        <td th:text="${usuario.email}">Email</td>
+        <td th:text="${usuario.telefone}">Telefone</td>
+        <td th:text="${usuario.endereco}">Endereço</td>
+        <td th:text="${usuario.tipo}">Tipo</td>
+        <td>
+            <form th:action="@{/usuarios/remover}" method="post" style="display:inline;">
+                <input type="hidden" name="index" th:value="${iterStat.index}" />
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a th:href="@{/usuarios/formulario}"><button>Voltar para o formulário</button></a>
+</body>
+</html>
